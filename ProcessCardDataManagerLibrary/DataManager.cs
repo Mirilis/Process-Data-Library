@@ -7,6 +7,10 @@ namespace ProcessCardDataManagerLibrary
 {
     public class DataManager
     {
-        
+        public void CreateNewProcessCardType(ProcessCardTypeData< TypeToAdd)
+        {
+            
+        }
+
     }
 }
