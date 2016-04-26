@@ -58,6 +58,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProcessCardDataFramework.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ProcessCardDataTypes.cs" />
+    <Compile Include="ProcessCardTypeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +69,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ProcessCardDataFramework.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProcessCardDataFramework.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
