@@ -53,13 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataManager.cs" />
+    <Compile Include="DataTemplateDictionary.cs" />
     <Compile Include="ProcessCardDataFramework.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProcessCardDataFramework.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ProcessCardDataTypes.cs" />
-    <Compile Include="ProcessCardTypeData.cs" />
+    <Compile Include="DataType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

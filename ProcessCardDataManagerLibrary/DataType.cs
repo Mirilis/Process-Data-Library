@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProcessCardDataManagerLibrary
 {
-    public enum ProcessCardDataType
+    public enum DataType
     {
         STRING,
         INT,

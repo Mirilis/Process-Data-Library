@@ -19,10 +19,11 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardData", "ProcessCardNames", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.ProcessCardNames), "ProcessCardData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.ProcessCardData), true)]
-[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "RevisionInformationProcessCardData", "RevisionInformation", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.RevisionInformation), "ProcessCardData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.ProcessCardData), true)]
-[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.ProcessCardDataTemplate), "ProcessCardType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.ProcessCardType))]
-[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardType", "ProcessCardNames", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.ProcessCardNames), "ProcessCardType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.ProcessCardType))]
+[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.DataTemplate), "ProcessCardType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.Template))]
+[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardType", "ProcessCardNames", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.Document), "ProcessCardType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.Template))]
+[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "ProcessCardDataProcessCardDataTemplate", "ProcessCardData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.Data), "ProcessCardDataTemplate", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.DataTemplate))]
+[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "DataRevision", "Data", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.Data), "Revision", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.Revision))]
+[assembly: EdmRelationshipAttribute("ProcessCardDataFramework", "DocumentData", "Document", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ProcessCardDataManagerLibrary.Document), "Data", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ProcessCardDataManagerLibrary.Data))]
 
 #endregion
 
@@ -77,125 +78,125 @@ namespace ProcessCardDataManagerLibrary
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ProcessCardNames> ProcessCardNames
+        public ObjectSet<Document> Documents
         {
             get
             {
-                if ((_ProcessCardNames == null))
+                if ((_Documents == null))
                 {
-                    _ProcessCardNames = base.CreateObjectSet<ProcessCardNames>("ProcessCardNames");
+                    _Documents = base.CreateObjectSet<Document>("Documents");
                 }
-                return _ProcessCardNames;
+                return _Documents;
             }
         }
-        private ObjectSet<ProcessCardNames> _ProcessCardNames;
+        private ObjectSet<Document> _Documents;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ProcessCardData> ProcessCardDatas
+        public ObjectSet<Data> Data
         {
             get
             {
-                if ((_ProcessCardDatas == null))
+                if ((_Data == null))
                 {
-                    _ProcessCardDatas = base.CreateObjectSet<ProcessCardData>("ProcessCardDatas");
+                    _Data = base.CreateObjectSet<Data>("Data");
                 }
-                return _ProcessCardDatas;
+                return _Data;
             }
         }
-        private ObjectSet<ProcessCardData> _ProcessCardDatas;
+        private ObjectSet<Data> _Data;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<RevisionInformation> RevisionInformations
+        public ObjectSet<Revision> Revisions
         {
             get
             {
-                if ((_RevisionInformations == null))
+                if ((_Revisions == null))
                 {
-                    _RevisionInformations = base.CreateObjectSet<RevisionInformation>("RevisionInformations");
+                    _Revisions = base.CreateObjectSet<Revision>("Revisions");
                 }
-                return _RevisionInformations;
+                return _Revisions;
             }
         }
-        private ObjectSet<RevisionInformation> _RevisionInformations;
+        private ObjectSet<Revision> _Revisions;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ProcessCardType> ProcessCardTypes
+        public ObjectSet<Template> Templates
         {
             get
             {
-                if ((_ProcessCardTypes == null))
+                if ((_Templates == null))
                 {
-                    _ProcessCardTypes = base.CreateObjectSet<ProcessCardType>("ProcessCardTypes");
+                    _Templates = base.CreateObjectSet<Template>("Templates");
                 }
-                return _ProcessCardTypes;
+                return _Templates;
             }
         }
-        private ObjectSet<ProcessCardType> _ProcessCardTypes;
+        private ObjectSet<Template> _Templates;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ProcessCardDataTemplate> ProcessCardDataTemplates
+        public ObjectSet<DataTemplate> DataTemplates
         {
             get
             {
-                if ((_ProcessCardDataTemplates == null))
+                if ((_DataTemplates == null))
                 {
-                    _ProcessCardDataTemplates = base.CreateObjectSet<ProcessCardDataTemplate>("ProcessCardDataTemplates");
+                    _DataTemplates = base.CreateObjectSet<DataTemplate>("DataTemplates");
                 }
-                return _ProcessCardDataTemplates;
+                return _DataTemplates;
             }
         }
-        private ObjectSet<ProcessCardDataTemplate> _ProcessCardDataTemplates;
+        private ObjectSet<DataTemplate> _DataTemplates;
 
         #endregion
 
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ProcessCardNames EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Documents EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToProcessCardNames(ProcessCardNames processCardNames)
+        public void AddToDocuments(Document document)
         {
-            base.AddObject("ProcessCardNames", processCardNames);
+            base.AddObject("Documents", document);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ProcessCardDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Data EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToProcessCardDatas(ProcessCardData processCardData)
+        public void AddToData(Data data)
         {
-            base.AddObject("ProcessCardDatas", processCardData);
+            base.AddObject("Data", data);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the RevisionInformations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Revisions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToRevisionInformations(RevisionInformation revisionInformation)
+        public void AddToRevisions(Revision revision)
         {
-            base.AddObject("RevisionInformations", revisionInformation);
+            base.AddObject("Revisions", revision);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ProcessCardTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Templates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToProcessCardTypes(ProcessCardType processCardType)
+        public void AddToTemplates(Template template)
         {
-            base.AddObject("ProcessCardTypes", processCardType);
+            base.AddObject("Templates", template);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ProcessCardDataTemplates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the DataTemplates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToProcessCardDataTemplates(ProcessCardDataTemplate processCardDataTemplate)
+        public void AddToDataTemplates(DataTemplate dataTemplate)
         {
-            base.AddObject("ProcessCardDataTemplates", processCardDataTemplate);
+            base.AddObject("DataTemplates", dataTemplate);
         }
 
         #endregion
@@ -209,32 +210,24 @@ namespace ProcessCardDataManagerLibrary
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="ProcessCardData")]
+    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="Data")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ProcessCardData : EntityObject
+    public partial class Data : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ProcessCardData object.
+        /// Create a new Data object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="processCardNamesId">Initial value of the ProcessCardNamesId property.</param>
-        /// <param name="pcVariableName">Initial value of the pcVariableName property.</param>
-        /// <param name="pcVariableType">Initial value of the pcVariableType property.</param>
-        /// <param name="pcVariableValue">Initial value of the pcVariableValue property.</param>
-        /// <param name="revisionInformationId">Initial value of the RevisionInformationId property.</param>
-        public static ProcessCardData CreateProcessCardData(global::System.Int32 id, global::System.Int32 processCardNamesId, global::System.String pcVariableName, global::System.String pcVariableType, global::System.Byte pcVariableValue, global::System.Int32 revisionInformationId)
+        /// <param name="value">Initial value of the Value property.</param>
+        public static Data CreateData(global::System.Int32 id, global::System.Byte value)
         {
-            ProcessCardData processCardData = new ProcessCardData();
-            processCardData.Id = id;
-            processCardData.ProcessCardNamesId = processCardNamesId;
-            processCardData.pcVariableName = pcVariableName;
-            processCardData.pcVariableType = pcVariableType;
-            processCardData.pcVariableValue = pcVariableValue;
-            processCardData.RevisionInformationId = revisionInformationId;
-            return processCardData;
+            Data data = new Data();
+            data.Id = id;
+            data.Value = value;
+            return data;
         }
 
         #endregion
@@ -273,120 +266,24 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ProcessCardNamesId
+        public global::System.Byte Value
         {
             get
             {
-                return _ProcessCardNamesId;
+                return _Value;
             }
             set
             {
-                OnProcessCardNamesIdChanging(value);
-                ReportPropertyChanging("ProcessCardNamesId");
-                _ProcessCardNamesId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ProcessCardNamesId");
-                OnProcessCardNamesIdChanged();
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
             }
         }
-        private global::System.Int32 _ProcessCardNamesId;
-        partial void OnProcessCardNamesIdChanging(global::System.Int32 value);
-        partial void OnProcessCardNamesIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String pcVariableName
-        {
-            get
-            {
-                return _pcVariableName;
-            }
-            set
-            {
-                OnpcVariableNameChanging(value);
-                ReportPropertyChanging("pcVariableName");
-                _pcVariableName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("pcVariableName");
-                OnpcVariableNameChanged();
-            }
-        }
-        private global::System.String _pcVariableName;
-        partial void OnpcVariableNameChanging(global::System.String value);
-        partial void OnpcVariableNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String pcVariableType
-        {
-            get
-            {
-                return _pcVariableType;
-            }
-            set
-            {
-                OnpcVariableTypeChanging(value);
-                ReportPropertyChanging("pcVariableType");
-                _pcVariableType = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("pcVariableType");
-                OnpcVariableTypeChanged();
-            }
-        }
-        private global::System.String _pcVariableType;
-        partial void OnpcVariableTypeChanging(global::System.String value);
-        partial void OnpcVariableTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Byte pcVariableValue
-        {
-            get
-            {
-                return _pcVariableValue;
-            }
-            set
-            {
-                OnpcVariableValueChanging(value);
-                ReportPropertyChanging("pcVariableValue");
-                _pcVariableValue = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("pcVariableValue");
-                OnpcVariableValueChanged();
-            }
-        }
-        private global::System.Byte _pcVariableValue;
-        partial void OnpcVariableValueChanging(global::System.Byte value);
-        partial void OnpcVariableValueChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 RevisionInformationId
-        {
-            get
-            {
-                return _RevisionInformationId;
-            }
-            set
-            {
-                OnRevisionInformationIdChanging(value);
-                ReportPropertyChanging("RevisionInformationId");
-                _RevisionInformationId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("RevisionInformationId");
-                OnRevisionInformationIdChanged();
-            }
-        }
-        private global::System.Int32 _RevisionInformationId;
-        partial void OnRevisionInformationIdChanging(global::System.Int32 value);
-        partial void OnRevisionInformationIdChanged();
+        private global::System.Byte _Value;
+        partial void OnValueChanging(global::System.Byte value);
+        partial void OnValueChanged();
 
         #endregion
 
@@ -399,16 +296,16 @@ namespace ProcessCardDataManagerLibrary
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardData", "ProcessCardNames")]
-        public ProcessCardNames ProcessCardName
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardDataProcessCardDataTemplate", "ProcessCardDataTemplate")]
+        public DataTemplate Template
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardNames>("ProcessCardDataFramework.ProcessCardNamesProcessCardData", "ProcessCardNames").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DataTemplate>("ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate", "ProcessCardDataTemplate").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardNames>("ProcessCardDataFramework.ProcessCardNamesProcessCardData", "ProcessCardNames").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DataTemplate>("ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate", "ProcessCardDataTemplate").Value = value;
             }
         }
         /// <summary>
@@ -416,17 +313,17 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ProcessCardNames> ProcessCardNameReference
+        public EntityReference<DataTemplate> TemplateReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardNames>("ProcessCardDataFramework.ProcessCardNamesProcessCardData", "ProcessCardNames");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DataTemplate>("ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate", "ProcessCardDataTemplate");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProcessCardNames>("ProcessCardDataFramework.ProcessCardNamesProcessCardData", "ProcessCardNames", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DataTemplate>("ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate", "ProcessCardDataTemplate", value);
                 }
             }
         }
@@ -437,16 +334,16 @@ namespace ProcessCardDataManagerLibrary
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "RevisionInformationProcessCardData", "RevisionInformation")]
-        public RevisionInformation RevisionInformation
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "DataRevision", "Revision")]
+        public Revision Revision
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RevisionInformation>("ProcessCardDataFramework.RevisionInformationProcessCardData", "RevisionInformation").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Revision>("ProcessCardDataFramework.DataRevision", "Revision").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RevisionInformation>("ProcessCardDataFramework.RevisionInformationProcessCardData", "RevisionInformation").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Revision>("ProcessCardDataFramework.DataRevision", "Revision").Value = value;
             }
         }
         /// <summary>
@@ -454,17 +351,55 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<RevisionInformation> RevisionInformationReference
+        public EntityReference<Revision> RevisionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RevisionInformation>("ProcessCardDataFramework.RevisionInformationProcessCardData", "RevisionInformation");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Revision>("ProcessCardDataFramework.DataRevision", "Revision");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RevisionInformation>("ProcessCardDataFramework.RevisionInformationProcessCardData", "RevisionInformation", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Revision>("ProcessCardDataFramework.DataRevision", "Revision", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "DocumentData", "Document")]
+        public Document Document
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Document>("ProcessCardDataFramework.DocumentData", "Document").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Document>("ProcessCardDataFramework.DocumentData", "Document").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Document> DocumentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Document>("ProcessCardDataFramework.DocumentData", "Document");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Document>("ProcessCardDataFramework.DocumentData", "Document", value);
                 }
             }
         }
@@ -476,26 +411,26 @@ namespace ProcessCardDataManagerLibrary
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="ProcessCardDataTemplate")]
+    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="DataTemplate")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ProcessCardDataTemplate : EntityObject
+    public partial class DataTemplate : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ProcessCardDataTemplate object.
+        /// Create a new DataTemplate object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="ptVariableName">Initial value of the ptVariableName property.</param>
-        /// <param name="ptVariableType">Initial value of the ptVariableType property.</param>
-        public static ProcessCardDataTemplate CreateProcessCardDataTemplate(global::System.Int32 id, global::System.String ptVariableName, global::System.String ptVariableType)
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        public static DataTemplate CreateDataTemplate(global::System.Int32 id, global::System.String name, global::System.String type)
         {
-            ProcessCardDataTemplate processCardDataTemplate = new ProcessCardDataTemplate();
-            processCardDataTemplate.Id = id;
-            processCardDataTemplate.ptVariableName = ptVariableName;
-            processCardDataTemplate.ptVariableType = ptVariableType;
-            return processCardDataTemplate;
+            DataTemplate dataTemplate = new DataTemplate();
+            dataTemplate.Id = id;
+            dataTemplate.Name = name;
+            dataTemplate.Type = type;
+            return dataTemplate;
         }
 
         #endregion
@@ -534,48 +469,48 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String ptVariableName
+        public global::System.String Name
         {
             get
             {
-                return _ptVariableName;
+                return _Name;
             }
             set
             {
-                OnptVariableNameChanging(value);
-                ReportPropertyChanging("ptVariableName");
-                _ptVariableName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ptVariableName");
-                OnptVariableNameChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _ptVariableName;
-        partial void OnptVariableNameChanging(global::System.String value);
-        partial void OnptVariableNameChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String ptVariableType
+        public global::System.String Type
         {
             get
             {
-                return _ptVariableType;
+                return _Type;
             }
             set
             {
-                OnptVariableTypeChanging(value);
-                ReportPropertyChanging("ptVariableType");
-                _ptVariableType = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ptVariableType");
-                OnptVariableTypeChanged();
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
             }
         }
-        private global::System.String _ptVariableType;
-        partial void OnptVariableTypeChanging(global::System.String value);
-        partial void OnptVariableTypeChanged();
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
 
         #endregion
 
@@ -589,15 +524,15 @@ namespace ProcessCardDataManagerLibrary
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardDataTemplateProcessCardType", "ProcessCardType")]
-        public ProcessCardType ProcessCardType
+        public Template Template
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Template>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Template>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType").Value = value;
             }
         }
         /// <summary>
@@ -605,17 +540,39 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ProcessCardType> ProcessCardTypeReference
+        public EntityReference<Template> TemplateReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Template>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Template>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardDataProcessCardDataTemplate", "ProcessCardData")]
+        public EntityCollection<Data> Data
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Data>("ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate", "ProcessCardData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Data>("ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate", "ProcessCardData", value);
                 }
             }
         }
@@ -627,24 +584,24 @@ namespace ProcessCardDataManagerLibrary
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="ProcessCardNames")]
+    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="Document")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ProcessCardNames : EntityObject
+    public partial class Document : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ProcessCardNames object.
+        /// Create a new Document object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="pcFileName">Initial value of the pcFileName property.</param>
-        public static ProcessCardNames CreateProcessCardNames(global::System.Int32 id, global::System.String pcFileName)
+        /// <param name="name">Initial value of the Name property.</param>
+        public static Document CreateDocument(global::System.Int32 id, global::System.String name)
         {
-            ProcessCardNames processCardNames = new ProcessCardNames();
-            processCardNames.Id = id;
-            processCardNames.pcFileName = pcFileName;
-            return processCardNames;
+            Document document = new Document();
+            document.Id = id;
+            document.Name = name;
+            return document;
         }
 
         #endregion
@@ -683,24 +640,24 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String pcFileName
+        public global::System.String Name
         {
             get
             {
-                return _pcFileName;
+                return _Name;
             }
             set
             {
-                OnpcFileNameChanging(value);
-                ReportPropertyChanging("pcFileName");
-                _pcFileName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("pcFileName");
-                OnpcFileNameChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _pcFileName;
-        partial void OnpcFileNameChanging(global::System.String value);
-        partial void OnpcFileNameChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
 
         #endregion
 
@@ -713,18 +670,34 @@ namespace ProcessCardDataManagerLibrary
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardData", "ProcessCardData")]
-        public EntityCollection<ProcessCardData> ProcessCardDatas
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardType", "ProcessCardType")]
+        public Template Template
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProcessCardData>("ProcessCardDataFramework.ProcessCardNamesProcessCardData", "ProcessCardData");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Template>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Template>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Template> TemplateReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Template>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProcessCardData>("ProcessCardDataFramework.ProcessCardNamesProcessCardData", "ProcessCardData", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Template>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType", value);
                 }
             }
         }
@@ -735,34 +708,18 @@ namespace ProcessCardDataManagerLibrary
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardType", "ProcessCardType")]
-        public ProcessCardType ProcessCardType
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "DocumentData", "Data")]
+        public EntityCollection<Data> Data
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ProcessCardType> ProcessCardTypeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Data>("ProcessCardDataFramework.DocumentData", "Data");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProcessCardType>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Data>("ProcessCardDataFramework.DocumentData", "Data", value);
                 }
             }
         }
@@ -774,24 +731,26 @@ namespace ProcessCardDataManagerLibrary
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="ProcessCardType")]
+    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="Revision")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ProcessCardType : EntityObject
+    public partial class Revision : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ProcessCardType object.
+        /// Create a new Revision object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="pcType">Initial value of the pcType property.</param>
-        public static ProcessCardType CreateProcessCardType(global::System.Int32 id, global::System.String pcType)
+        /// <param name="author">Initial value of the Author property.</param>
+        /// <param name="date">Initial value of the Date property.</param>
+        public static Revision CreateRevision(global::System.Int32 id, global::System.String author, global::System.DateTime date)
         {
-            ProcessCardType processCardType = new ProcessCardType();
-            processCardType.Id = id;
-            processCardType.pcType = pcType;
-            return processCardType;
+            Revision revision = new Revision();
+            revision.Id = id;
+            revision.Author = author;
+            revision.Date = date;
+            return revision;
         }
 
         #endregion
@@ -830,24 +789,173 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String pcType
+        public global::System.String Author
         {
             get
             {
-                return _pcType;
+                return _Author;
             }
             set
             {
-                OnpcTypeChanging(value);
-                ReportPropertyChanging("pcType");
-                _pcType = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("pcType");
-                OnpcTypeChanged();
+                OnAuthorChanging(value);
+                ReportPropertyChanging("Author");
+                _Author = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Author");
+                OnAuthorChanged();
             }
         }
-        private global::System.String _pcType;
-        partial void OnpcTypeChanging(global::System.String value);
-        partial void OnpcTypeChanged();
+        private global::System.String _Author;
+        partial void OnAuthorChanging(global::System.String value);
+        partial void OnAuthorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Date
+        {
+            get
+            {
+                return _Date;
+            }
+            set
+            {
+                OnDateChanging(value);
+                ReportPropertyChanging("Date");
+                _Date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Date");
+                OnDateChanged();
+            }
+        }
+        private global::System.DateTime _Date;
+        partial void OnDateChanging(global::System.DateTime value);
+        partial void OnDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "DataRevision", "Data")]
+        public Data Data
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Data>("ProcessCardDataFramework.DataRevision", "Data").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Data>("ProcessCardDataFramework.DataRevision", "Data").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Data> DataReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Data>("ProcessCardDataFramework.DataRevision", "Data");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Data>("ProcessCardDataFramework.DataRevision", "Data", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="Template")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Template : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Template object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        public static Template CreateTemplate(global::System.Int32 id, global::System.String type)
+        {
+            Template template = new Template();
+            template.Id = id;
+            template.Type = type;
+            return template;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
 
         #endregion
 
@@ -861,17 +969,17 @@ namespace ProcessCardDataManagerLibrary
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate")]
-        public EntityCollection<ProcessCardDataTemplate> ProcessCardDataTemplates
+        public EntityCollection<DataTemplate> DataTemplate
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProcessCardDataTemplate>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DataTemplate>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProcessCardDataTemplate>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DataTemplate>("ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType", "ProcessCardDataTemplate", value);
                 }
             }
         }
@@ -883,152 +991,17 @@ namespace ProcessCardDataManagerLibrary
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "ProcessCardNamesProcessCardType", "ProcessCardNames")]
-        public EntityCollection<ProcessCardNames> ProcessCardNames
+        public EntityCollection<Document> Names
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProcessCardNames>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardNames");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Document>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardNames");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProcessCardNames>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardNames", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProcessCardDataFramework", Name="RevisionInformation")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class RevisionInformation : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new RevisionInformation object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="revisedBy">Initial value of the RevisedBy property.</param>
-        /// <param name="revisedDate">Initial value of the RevisedDate property.</param>
-        public static RevisionInformation CreateRevisionInformation(global::System.Int32 id, global::System.String revisedBy, global::System.DateTime revisedDate)
-        {
-            RevisionInformation revisionInformation = new RevisionInformation();
-            revisionInformation.Id = id;
-            revisionInformation.RevisedBy = revisedBy;
-            revisionInformation.RevisedDate = revisedDate;
-            return revisionInformation;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String RevisedBy
-        {
-            get
-            {
-                return _RevisedBy;
-            }
-            set
-            {
-                OnRevisedByChanging(value);
-                ReportPropertyChanging("RevisedBy");
-                _RevisedBy = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("RevisedBy");
-                OnRevisedByChanged();
-            }
-        }
-        private global::System.String _RevisedBy;
-        partial void OnRevisedByChanging(global::System.String value);
-        partial void OnRevisedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime RevisedDate
-        {
-            get
-            {
-                return _RevisedDate;
-            }
-            set
-            {
-                OnRevisedDateChanging(value);
-                ReportPropertyChanging("RevisedDate");
-                _RevisedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("RevisedDate");
-                OnRevisedDateChanged();
-            }
-        }
-        private global::System.DateTime _RevisedDate;
-        partial void OnRevisedDateChanging(global::System.DateTime value);
-        partial void OnRevisedDateChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProcessCardDataFramework", "RevisionInformationProcessCardData", "ProcessCardData")]
-        public EntityCollection<ProcessCardData> ProcessCardDatas
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProcessCardData>("ProcessCardDataFramework.RevisionInformationProcessCardData", "ProcessCardData");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProcessCardData>("ProcessCardDataFramework.RevisionInformationProcessCardData", "ProcessCardData", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Document>("ProcessCardDataFramework.ProcessCardNamesProcessCardType", "ProcessCardNames", value);
                 }
             }
         }

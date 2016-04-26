@@ -1,9 +1,9 @@
 
 -- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/26/2016 14:46:12
--- Generated from EDMX file: C:\Users\ahoover\documents\visual studio 2010\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
+-- Date Created: 04/26/2016 18:20:07
+-- Generated from EDMX file: C:\Users\Mirilis\Documents\Visual Studio 2015\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,80 +17,85 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ProcessCardNamesProcessCardData]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcessCardDatas] DROP CONSTRAINT [FK_ProcessCardNamesProcessCardData];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RevisionInformationProcessCardData]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcessCardDatas] DROP CONSTRAINT [FK_RevisionInformationProcessCardData];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ProcessCardDataTemplateProcessCardType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcessCardDataTemplates] DROP CONSTRAINT [FK_ProcessCardDataTemplateProcessCardType];
+    ALTER TABLE [dbo].[DataTemplates] DROP CONSTRAINT [FK_ProcessCardDataTemplateProcessCardType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcessCardNamesProcessCardType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Documents] DROP CONSTRAINT [FK_ProcessCardNamesProcessCardType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcessCardDataProcessCardDataTemplate]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Data] DROP CONSTRAINT [FK_ProcessCardDataProcessCardDataTemplate];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DataRevision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Data] DROP CONSTRAINT [FK_DataRevision];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DocumentData]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Data] DROP CONSTRAINT [FK_DocumentData];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[ProcessCardNames]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProcessCardNames];
+IF OBJECT_ID(N'[dbo].[Documents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Documents];
 GO
-IF OBJECT_ID(N'[dbo].[ProcessCardDatas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProcessCardDatas];
+IF OBJECT_ID(N'[dbo].[Data]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Data];
 GO
-IF OBJECT_ID(N'[dbo].[RevisionInformations]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[RevisionInformations];
+IF OBJECT_ID(N'[dbo].[Revisions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Revisions];
 GO
-IF OBJECT_ID(N'[dbo].[ProcessCardTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProcessCardTypes];
+IF OBJECT_ID(N'[dbo].[Templates]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Templates];
 GO
-IF OBJECT_ID(N'[dbo].[ProcessCardDataTemplates]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProcessCardDataTemplates];
+IF OBJECT_ID(N'[dbo].[DataTemplates]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DataTemplates];
 GO
 
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'ProcessCardNames'
-CREATE TABLE [dbo].[ProcessCardNames] (
+-- Creating table 'Documents'
+CREATE TABLE [dbo].[Documents] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [pcFileName] nvarchar(max)  NOT NULL,
-    [ProcessCardType_Id] int  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Template_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'ProcessCardDatas'
-CREATE TABLE [dbo].[ProcessCardDatas] (
+-- Creating table 'Data'
+CREATE TABLE [dbo].[Data] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ProcessCardNamesId] int  NOT NULL,
-    [pcVariableName] nvarchar(max)  NOT NULL,
-    [pcVariableType] nvarchar(max)  NOT NULL,
-    [pcVariableValue] tinyint  NOT NULL,
-    [RevisionInformationId] int  NOT NULL
+    [Value] tinyint  NOT NULL,
+    [Template_Id] int  NOT NULL,
+    [Revision_Id] int  NOT NULL,
+    [Document_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'RevisionInformations'
-CREATE TABLE [dbo].[RevisionInformations] (
+-- Creating table 'Revisions'
+CREATE TABLE [dbo].[Revisions] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [RevisedBy] nvarchar(max)  NOT NULL,
-    [RevisedDate] datetime  NOT NULL
+    [Author] nvarchar(max)  NOT NULL,
+    [Date] datetime  NOT NULL
 );
 GO
 
--- Creating table 'ProcessCardTypes'
-CREATE TABLE [dbo].[ProcessCardTypes] (
+-- Creating table 'Templates'
+CREATE TABLE [dbo].[Templates] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [pcType] nvarchar(max)  NOT NULL
+    [Type] nvarchar(max)  NOT NULL
 );
 GO
 
--- Creating table 'ProcessCardDataTemplates'
-CREATE TABLE [dbo].[ProcessCardDataTemplates] (
+-- Creating table 'DataTemplates'
+CREATE TABLE [dbo].[DataTemplates] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ptVariableName] nvarchar(max)  NOT NULL,
-    [ptVariableType] nvarchar(max)  NOT NULL,
-    [ProcessCardType_Id] int  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Type] nvarchar(max)  NOT NULL,
+    [Template_Id] int  NOT NULL
 );
 GO
 
@@ -98,33 +103,33 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'ProcessCardNames'
-ALTER TABLE [dbo].[ProcessCardNames]
-ADD CONSTRAINT [PK_ProcessCardNames]
+-- Creating primary key on [Id] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
+ADD CONSTRAINT [PK_Documents]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProcessCardDatas'
-ALTER TABLE [dbo].[ProcessCardDatas]
-ADD CONSTRAINT [PK_ProcessCardDatas]
+-- Creating primary key on [Id] in table 'Data'
+ALTER TABLE [dbo].[Data]
+ADD CONSTRAINT [PK_Data]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'RevisionInformations'
-ALTER TABLE [dbo].[RevisionInformations]
-ADD CONSTRAINT [PK_RevisionInformations]
+-- Creating primary key on [Id] in table 'Revisions'
+ALTER TABLE [dbo].[Revisions]
+ADD CONSTRAINT [PK_Revisions]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProcessCardTypes'
-ALTER TABLE [dbo].[ProcessCardTypes]
-ADD CONSTRAINT [PK_ProcessCardTypes]
+-- Creating primary key on [Id] in table 'Templates'
+ALTER TABLE [dbo].[Templates]
+ADD CONSTRAINT [PK_Templates]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProcessCardDataTemplates'
-ALTER TABLE [dbo].[ProcessCardDataTemplates]
-ADD CONSTRAINT [PK_ProcessCardDataTemplates]
+-- Creating primary key on [Id] in table 'DataTemplates'
+ALTER TABLE [dbo].[DataTemplates]
+ADD CONSTRAINT [PK_DataTemplates]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -132,60 +137,79 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [ProcessCardNamesId] in table 'ProcessCardDatas'
-ALTER TABLE [dbo].[ProcessCardDatas]
-ADD CONSTRAINT [FK_ProcessCardNamesProcessCardData]
-    FOREIGN KEY ([ProcessCardNamesId])
-    REFERENCES [dbo].[ProcessCardNames]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardNamesProcessCardData'
-CREATE INDEX [IX_FK_ProcessCardNamesProcessCardData]
-ON [dbo].[ProcessCardDatas]
-    ([ProcessCardNamesId]);
-GO
-
--- Creating foreign key on [RevisionInformationId] in table 'ProcessCardDatas'
-ALTER TABLE [dbo].[ProcessCardDatas]
-ADD CONSTRAINT [FK_RevisionInformationProcessCardData]
-    FOREIGN KEY ([RevisionInformationId])
-    REFERENCES [dbo].[RevisionInformations]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RevisionInformationProcessCardData'
-CREATE INDEX [IX_FK_RevisionInformationProcessCardData]
-ON [dbo].[ProcessCardDatas]
-    ([RevisionInformationId]);
-GO
-
--- Creating foreign key on [ProcessCardType_Id] in table 'ProcessCardDataTemplates'
-ALTER TABLE [dbo].[ProcessCardDataTemplates]
+-- Creating foreign key on [Template_Id] in table 'DataTemplates'
+ALTER TABLE [dbo].[DataTemplates]
 ADD CONSTRAINT [FK_ProcessCardDataTemplateProcessCardType]
-    FOREIGN KEY ([ProcessCardType_Id])
-    REFERENCES [dbo].[ProcessCardTypes]
+    FOREIGN KEY ([Template_Id])
+    REFERENCES [dbo].[Templates]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardDataTemplateProcessCardType'
 CREATE INDEX [IX_FK_ProcessCardDataTemplateProcessCardType]
-ON [dbo].[ProcessCardDataTemplates]
-    ([ProcessCardType_Id]);
+ON [dbo].[DataTemplates]
+    ([Template_Id]);
 GO
 
--- Creating foreign key on [ProcessCardType_Id] in table 'ProcessCardNames'
-ALTER TABLE [dbo].[ProcessCardNames]
+-- Creating foreign key on [Template_Id] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
 ADD CONSTRAINT [FK_ProcessCardNamesProcessCardType]
-    FOREIGN KEY ([ProcessCardType_Id])
-    REFERENCES [dbo].[ProcessCardTypes]
+    FOREIGN KEY ([Template_Id])
+    REFERENCES [dbo].[Templates]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardNamesProcessCardType'
 CREATE INDEX [IX_FK_ProcessCardNamesProcessCardType]
-ON [dbo].[ProcessCardNames]
-    ([ProcessCardType_Id]);
+ON [dbo].[Documents]
+    ([Template_Id]);
+GO
+
+-- Creating foreign key on [Template_Id] in table 'Data'
+ALTER TABLE [dbo].[Data]
+ADD CONSTRAINT [FK_ProcessCardDataProcessCardDataTemplate]
+    FOREIGN KEY ([Template_Id])
+    REFERENCES [dbo].[DataTemplates]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardDataProcessCardDataTemplate'
+CREATE INDEX [IX_FK_ProcessCardDataProcessCardDataTemplate]
+ON [dbo].[Data]
+    ([Template_Id]);
+GO
+
+-- Creating foreign key on [Revision_Id] in table 'Data'
+ALTER TABLE [dbo].[Data]
+ADD CONSTRAINT [FK_DataRevision]
+    FOREIGN KEY ([Revision_Id])
+    REFERENCES [dbo].[Revisions]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DataRevision'
+CREATE INDEX [IX_FK_DataRevision]
+ON [dbo].[Data]
+    ([Revision_Id]);
+GO
+
+-- Creating foreign key on [Document_Id] in table 'Data'
+ALTER TABLE [dbo].[Data]
+ADD CONSTRAINT [FK_DocumentData]
+    FOREIGN KEY ([Document_Id])
+    REFERENCES [dbo].[Documents]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DocumentData'
+CREATE INDEX [IX_FK_DocumentData]
+ON [dbo].[Data]
+    ([Document_Id]);
 GO
 
 -- --------------------------------------------------

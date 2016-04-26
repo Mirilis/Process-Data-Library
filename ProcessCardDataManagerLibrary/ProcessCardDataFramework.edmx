@@ -6,116 +6,131 @@
     <edmx:StorageModels>
     <Schema Namespace="ProcessCardDataFramework.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="ProcessCardDataFrameworkStoreContainer">
-    <EntitySet Name="ProcessCardNames" EntityType="ProcessCardDataFramework.Store.ProcessCardNames" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProcessCardDatas" EntityType="ProcessCardDataFramework.Store.ProcessCardDatas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RevisionInformations" EntityType="ProcessCardDataFramework.Store.RevisionInformations" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProcessCardTypes" EntityType="ProcessCardDataFramework.Store.ProcessCardTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProcessCardDataTemplates" EntityType="ProcessCardDataFramework.Store.ProcessCardDataTemplates" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="ProcessCardNamesProcessCardData" Association="ProcessCardDataFramework.Store.ProcessCardNamesProcessCardData">
-      <End Role="ProcessCardNames" EntitySet="ProcessCardNames" />
-      <End Role="ProcessCardData" EntitySet="ProcessCardDatas" />
-    </AssociationSet>
-    <AssociationSet Name="RevisionInformationProcessCardData" Association="ProcessCardDataFramework.Store.RevisionInformationProcessCardData">
-      <End Role="RevisionInformation" EntitySet="RevisionInformations" />
-      <End Role="ProcessCardData" EntitySet="ProcessCardDatas" />
-    </AssociationSet>
+    <EntitySet Name="Documents" EntityType="ProcessCardDataFramework.Store.Documents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Data" EntityType="ProcessCardDataFramework.Store.Data" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Revisions" EntityType="ProcessCardDataFramework.Store.Revisions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Templates" EntityType="ProcessCardDataFramework.Store.Templates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DataTemplates" EntityType="ProcessCardDataFramework.Store.DataTemplates" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ProcessCardDataTemplateProcessCardType" Association="ProcessCardDataFramework.Store.ProcessCardDataTemplateProcessCardType">
-      <End Role="ProcessCardDataTemplate" EntitySet="ProcessCardDataTemplates" />
-      <End Role="ProcessCardType" EntitySet="ProcessCardTypes" />
+      <End Role="ProcessCardDataTemplate" EntitySet="DataTemplates" />
+      <End Role="ProcessCardType" EntitySet="Templates" />
     </AssociationSet>
     <AssociationSet Name="ProcessCardNamesProcessCardType" Association="ProcessCardDataFramework.Store.ProcessCardNamesProcessCardType">
-      <End Role="ProcessCardNames" EntitySet="ProcessCardNames" />
-      <End Role="ProcessCardType" EntitySet="ProcessCardTypes" />
+      <End Role="ProcessCardNames" EntitySet="Documents" />
+      <End Role="ProcessCardType" EntitySet="Templates" />
+    </AssociationSet>
+    <AssociationSet Name="ProcessCardDataProcessCardDataTemplate" Association="ProcessCardDataFramework.Store.ProcessCardDataProcessCardDataTemplate">
+      <End Role="ProcessCardData" EntitySet="Data" />
+      <End Role="ProcessCardDataTemplate" EntitySet="DataTemplates" />
+    </AssociationSet>
+    <AssociationSet Name="DataRevision" Association="ProcessCardDataFramework.Store.DataRevision">
+      <End Role="Data" EntitySet="Data" />
+      <End Role="Revision" EntitySet="Revisions" />
+    </AssociationSet>
+    <AssociationSet Name="DocumentData" Association="ProcessCardDataFramework.Store.DocumentData">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="Data" EntitySet="Data" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="ProcessCardNames">
+  <EntityType Name="Documents">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="pcFileName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ProcessCardType_Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Template_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProcessCardDatas">
+  <EntityType Name="Data">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProcessCardNamesId" Type="int" Nullable="false" />
-    <Property Name="pcVariableName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="pcVariableType" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="pcVariableValue" Type="tinyint" Nullable="false" />
-    <Property Name="RevisionInformationId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="tinyint" Nullable="false" />
+    <Property Name="Template_Id" Type="int" Nullable="false" />
+    <Property Name="Revision_Id" Type="int" Nullable="false" />
+    <Property Name="Document_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="RevisionInformations">
+  <EntityType Name="Revisions">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RevisedBy" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RevisedDate" Type="datetime" Nullable="false" />
+    <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProcessCardTypes">
+  <EntityType Name="Templates">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="pcType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProcessCardDataTemplates">
+  <EntityType Name="DataTemplates">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ptVariableName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ptVariableType" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ProcessCardType_Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Template_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="ProcessCardNamesProcessCardData">
-    <End Role="ProcessCardNames" Type="ProcessCardDataFramework.Store.ProcessCardNames" Multiplicity="1" />
-    <End Role="ProcessCardData" Type="ProcessCardDataFramework.Store.ProcessCardDatas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProcessCardNames">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProcessCardData">
-        <PropertyRef Name="ProcessCardNamesId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RevisionInformationProcessCardData">
-    <End Role="RevisionInformation" Type="ProcessCardDataFramework.Store.RevisionInformations" Multiplicity="1" />
-    <End Role="ProcessCardData" Type="ProcessCardDataFramework.Store.ProcessCardDatas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RevisionInformation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProcessCardData">
-        <PropertyRef Name="RevisionInformationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ProcessCardDataTemplateProcessCardType">
-    <End Role="ProcessCardDataTemplate" Type="ProcessCardDataFramework.Store.ProcessCardDataTemplates" Multiplicity="*" />
-    <End Role="ProcessCardType" Type="ProcessCardDataFramework.Store.ProcessCardTypes" Multiplicity="1" />
+    <End Role="ProcessCardDataTemplate" Type="ProcessCardDataFramework.Store.DataTemplates" Multiplicity="*" />
+    <End Role="ProcessCardType" Type="ProcessCardDataFramework.Store.Templates" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="ProcessCardType">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProcessCardDataTemplate">
-        <PropertyRef Name="ProcessCardType_Id" />
+        <PropertyRef Name="Template_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ProcessCardNamesProcessCardType">
-    <End Role="ProcessCardNames" Type="ProcessCardDataFramework.Store.ProcessCardNames" Multiplicity="*" />
-    <End Role="ProcessCardType" Type="ProcessCardDataFramework.Store.ProcessCardTypes" Multiplicity="1" />
+    <End Role="ProcessCardNames" Type="ProcessCardDataFramework.Store.Documents" Multiplicity="*" />
+    <End Role="ProcessCardType" Type="ProcessCardDataFramework.Store.Templates" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="ProcessCardType">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ProcessCardNames">
-        <PropertyRef Name="ProcessCardType_Id" />
+        <PropertyRef Name="Template_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProcessCardDataProcessCardDataTemplate">
+    <End Role="ProcessCardData" Type="ProcessCardDataFramework.Store.Data" Multiplicity="*" />
+    <End Role="ProcessCardDataTemplate" Type="ProcessCardDataFramework.Store.DataTemplates" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ProcessCardDataTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProcessCardData">
+        <PropertyRef Name="Template_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DataRevision">
+    <End Role="Data" Type="ProcessCardDataFramework.Store.Data" Multiplicity="*" />
+    <End Role="Revision" Type="ProcessCardDataFramework.Store.Revisions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Revision">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Data">
+        <PropertyRef Name="Revision_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DocumentData">
+    <End Role="Document" Type="ProcessCardDataFramework.Store.Documents" Multiplicity="1" />
+    <End Role="Data" Type="ProcessCardDataFramework.Store.Data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Data">
+        <PropertyRef Name="Document_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -124,108 +139,98 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ProcessCardDataFramework" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="ProcessCardDataFrameworkContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ProcessCardNames" EntityType="ProcessCardDataFramework.ProcessCardNames" />
-          <EntitySet Name="ProcessCardDatas" EntityType="ProcessCardDataFramework.ProcessCardData" />
-          <AssociationSet Name="ProcessCardNamesProcessCardData" Association="ProcessCardDataFramework.ProcessCardNamesProcessCardData">
-            <End Role="ProcessCardNames" EntitySet="ProcessCardNames" />
-            <End Role="ProcessCardData" EntitySet="ProcessCardDatas" />
-          </AssociationSet>
-          <EntitySet Name="RevisionInformations" EntityType="ProcessCardDataFramework.RevisionInformation" />
-          <AssociationSet Name="RevisionInformationProcessCardData" Association="ProcessCardDataFramework.RevisionInformationProcessCardData">
-            <End Role="RevisionInformation" EntitySet="RevisionInformations" />
-            <End Role="ProcessCardData" EntitySet="ProcessCardDatas" />
-          </AssociationSet>
-          <EntitySet Name="ProcessCardTypes" EntityType="ProcessCardDataFramework.ProcessCardType" />
-          <EntitySet Name="ProcessCardDataTemplates" EntityType="ProcessCardDataFramework.ProcessCardDataTemplate" />
+          <EntitySet Name="Documents" EntityType="ProcessCardDataFramework.Document" />
+          <EntitySet Name="Data" EntityType="ProcessCardDataFramework.Data" />
+          <EntitySet Name="Revisions" EntityType="ProcessCardDataFramework.Revision" />
+          <EntitySet Name="Templates" EntityType="ProcessCardDataFramework.Template" />
+          <EntitySet Name="DataTemplates" EntityType="ProcessCardDataFramework.DataTemplate" />
           <AssociationSet Name="ProcessCardDataTemplateProcessCardType" Association="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType">
-            <End Role="ProcessCardDataTemplate" EntitySet="ProcessCardDataTemplates" />
-            <End Role="ProcessCardType" EntitySet="ProcessCardTypes" />
+            <End Role="ProcessCardDataTemplate" EntitySet="DataTemplates" />
+            <End Role="ProcessCardType" EntitySet="Templates" />
           </AssociationSet>
           <AssociationSet Name="ProcessCardNamesProcessCardType" Association="ProcessCardDataFramework.ProcessCardNamesProcessCardType">
-            <End Role="ProcessCardNames" EntitySet="ProcessCardNames" />
-            <End Role="ProcessCardType" EntitySet="ProcessCardTypes" />
+            <End Role="ProcessCardNames" EntitySet="Documents" />
+            <End Role="ProcessCardType" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="ProcessCardDataProcessCardDataTemplate" Association="ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate">
+            <End Role="ProcessCardData" EntitySet="Data" />
+            <End Role="ProcessCardDataTemplate" EntitySet="DataTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="DataRevision" Association="ProcessCardDataFramework.DataRevision">
+            <End Role="Data" EntitySet="Data" />
+            <End Role="Revision" EntitySet="Revisions" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentData" Association="ProcessCardDataFramework.DocumentData">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Data" EntitySet="Data" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="ProcessCardNames">
+        <EntityType Name="Document">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="pcFileName" Nullable="false" />
-          <NavigationProperty Name="ProcessCardDatas" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardData" FromRole="ProcessCardNames" ToRole="ProcessCardData" />
-          <NavigationProperty Name="ProcessCardType" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardType" FromRole="ProcessCardNames" ToRole="ProcessCardType" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="Template" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardType" FromRole="ProcessCardNames" ToRole="ProcessCardType" />
+          <NavigationProperty Name="Data" Relationship="ProcessCardDataFramework.DocumentData" FromRole="Document" ToRole="Data" />
         </EntityType>
-        <EntityType Name="ProcessCardData">
+        <EntityType Name="Data">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="ProcessCardName" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardData" FromRole="ProcessCardData" ToRole="ProcessCardNames" />
-          <Property Type="Int32" Name="ProcessCardNamesId" Nullable="false" />
-          <Property Type="String" Name="pcVariableName" Nullable="false" />
-          <Property Type="String" Name="pcVariableType" Nullable="false" />
-          <Property Type="Byte" Name="pcVariableValue" Nullable="false" />
-          <NavigationProperty Name="RevisionInformation" Relationship="ProcessCardDataFramework.RevisionInformationProcessCardData" FromRole="ProcessCardData" ToRole="RevisionInformation" />
-          <Property Type="Int32" Name="RevisionInformationId" Nullable="false" />
+          <Property Type="Byte" Name="Value" Nullable="false" />
+          <NavigationProperty Name="Template" Relationship="ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate" FromRole="ProcessCardData" ToRole="ProcessCardDataTemplate" />
+          <NavigationProperty Name="Revision" Relationship="ProcessCardDataFramework.DataRevision" FromRole="Data" ToRole="Revision" />
+          <NavigationProperty Name="Document" Relationship="ProcessCardDataFramework.DocumentData" FromRole="Data" ToRole="Document" />
         </EntityType>
-        <Association Name="ProcessCardNamesProcessCardData">
-          <End Type="ProcessCardDataFramework.ProcessCardNames" Role="ProcessCardNames" Multiplicity="1" />
-          <End Type="ProcessCardDataFramework.ProcessCardData" Role="ProcessCardData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProcessCardNames">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProcessCardData">
-              <PropertyRef Name="ProcessCardNamesId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="RevisionInformation">
+        <EntityType Name="Revision">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="RevisedBy" Nullable="false" />
-          <Property Type="DateTime" Name="RevisedDate" Nullable="false" />
-          <NavigationProperty Name="ProcessCardDatas" Relationship="ProcessCardDataFramework.RevisionInformationProcessCardData" FromRole="RevisionInformation" ToRole="ProcessCardData" />
+          <Property Type="String" Name="Author" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="ProcessCardDataFramework.DataRevision" FromRole="Revision" ToRole="Data" />
         </EntityType>
-        <Association Name="RevisionInformationProcessCardData">
-          <End Type="ProcessCardDataFramework.RevisionInformation" Role="RevisionInformation" Multiplicity="1" />
-          <End Type="ProcessCardDataFramework.ProcessCardData" Role="ProcessCardData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RevisionInformation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProcessCardData">
-              <PropertyRef Name="RevisionInformationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProcessCardType">
+        <EntityType Name="Template">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="pcType" Nullable="false" />
-          <NavigationProperty Name="ProcessCardDataTemplates" Relationship="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" FromRole="ProcessCardType" ToRole="ProcessCardDataTemplate" />
-          <NavigationProperty Name="ProcessCardNames" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardType" FromRole="ProcessCardType" ToRole="ProcessCardNames" />
+          <Property Type="String" Name="Type" Nullable="false" />
+          <NavigationProperty Name="DataTemplate" Relationship="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" FromRole="ProcessCardType" ToRole="ProcessCardDataTemplate" />
+          <NavigationProperty Name="Names" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardType" FromRole="ProcessCardType" ToRole="ProcessCardNames" />
         </EntityType>
-        <EntityType Name="ProcessCardDataTemplate">
+        <EntityType Name="DataTemplate">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ptVariableName" Nullable="false" />
-          <Property Type="String" Name="ptVariableType" Nullable="false" />
-          <NavigationProperty Name="ProcessCardType" Relationship="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" FromRole="ProcessCardDataTemplate" ToRole="ProcessCardType" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" />
+          <NavigationProperty Name="Template" Relationship="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" FromRole="ProcessCardDataTemplate" ToRole="ProcessCardType" />
+          <NavigationProperty Name="Data" Relationship="ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate" FromRole="ProcessCardDataTemplate" ToRole="ProcessCardData" />
         </EntityType>
         <Association Name="ProcessCardDataTemplateProcessCardType">
-          <End Type="ProcessCardDataFramework.ProcessCardDataTemplate" Role="ProcessCardDataTemplate" Multiplicity="*" />
-          <End Type="ProcessCardDataFramework.ProcessCardType" Role="ProcessCardType" Multiplicity="1" />
+          <End Type="ProcessCardDataFramework.DataTemplate" Role="ProcessCardDataTemplate" Multiplicity="*" />
+          <End Type="ProcessCardDataFramework.Template" Role="ProcessCardType" Multiplicity="1" />
         </Association>
         <Association Name="ProcessCardNamesProcessCardType">
-          <End Type="ProcessCardDataFramework.ProcessCardNames" Role="ProcessCardNames" Multiplicity="*" />
-          <End Type="ProcessCardDataFramework.ProcessCardType" Role="ProcessCardType" Multiplicity="1" />
+          <End Type="ProcessCardDataFramework.Document" Role="ProcessCardNames" Multiplicity="*" />
+          <End Type="ProcessCardDataFramework.Template" Role="ProcessCardType" Multiplicity="1" />
+        </Association>
+        <Association Name="ProcessCardDataProcessCardDataTemplate">
+          <End Type="ProcessCardDataFramework.Data" Role="ProcessCardData" Multiplicity="*" />
+          <End Type="ProcessCardDataFramework.DataTemplate" Role="ProcessCardDataTemplate" Multiplicity="1" />
+        </Association>
+        <Association Name="DataRevision">
+          <End Type="ProcessCardDataFramework.Data" Role="Data" Multiplicity="1" />
+          <End Type="ProcessCardDataFramework.Revision" Role="Revision" Multiplicity="1" />
+        </Association>
+        <Association Name="DocumentData">
+          <End Type="ProcessCardDataFramework.Document" Role="Document" Multiplicity="1" />
+          <End Type="ProcessCardDataFramework.Data" Role="Data" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -233,65 +238,85 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ProcessCardDataFrameworkStoreContainer" CdmEntityContainer="ProcessCardDataFrameworkContainer">
-    <EntitySetMapping Name="ProcessCardNames">
-      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.ProcessCardNames)">
-        <MappingFragment StoreEntitySet="ProcessCardNames">
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Document)">
+        <MappingFragment StoreEntitySet="Documents">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="pcFileName" ColumnName="pcFileName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProcessCardDatas">
-      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.ProcessCardData)">
-        <MappingFragment StoreEntitySet="ProcessCardDatas">
+    <EntitySetMapping Name="Data">
+      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Data)">
+        <MappingFragment StoreEntitySet="Data">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ProcessCardNamesId" ColumnName="ProcessCardNamesId" />
-          <ScalarProperty Name="pcVariableName" ColumnName="pcVariableName" />
-          <ScalarProperty Name="pcVariableType" ColumnName="pcVariableType" />
-          <ScalarProperty Name="pcVariableValue" ColumnName="pcVariableValue" />
-          <ScalarProperty Name="RevisionInformationId" ColumnName="RevisionInformationId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RevisionInformations">
-      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.RevisionInformation)">
-        <MappingFragment StoreEntitySet="RevisionInformations">
+    <EntitySetMapping Name="Revisions">
+      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Revision)">
+        <MappingFragment StoreEntitySet="Revisions">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RevisedBy" ColumnName="RevisedBy" />
-          <ScalarProperty Name="RevisedDate" ColumnName="RevisedDate" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProcessCardTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.ProcessCardType)">
-        <MappingFragment StoreEntitySet="ProcessCardTypes">
+    <EntitySetMapping Name="Templates">
+      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Template)">
+        <MappingFragment StoreEntitySet="Templates">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="pcType" ColumnName="pcType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProcessCardDataTemplates">
-      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.ProcessCardDataTemplate)">
-        <MappingFragment StoreEntitySet="ProcessCardDataTemplates">
+    <EntitySetMapping Name="DataTemplates">
+      <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.DataTemplate)">
+        <MappingFragment StoreEntitySet="DataTemplates">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ptVariableName" ColumnName="ptVariableName" />
-          <ScalarProperty Name="ptVariableType" ColumnName="ptVariableType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ProcessCardDataTemplateProcessCardType" TypeName="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" StoreEntitySet="ProcessCardDataTemplates">
+    <AssociationSetMapping Name="ProcessCardDataTemplateProcessCardType" TypeName="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" StoreEntitySet="DataTemplates">
       <EndProperty Name="ProcessCardType">
-        <ScalarProperty Name="Id" ColumnName="ProcessCardType_Id" />
+        <ScalarProperty Name="Id" ColumnName="Template_Id" />
       </EndProperty>
       <EndProperty Name="ProcessCardDataTemplate">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProcessCardNamesProcessCardType" TypeName="ProcessCardDataFramework.ProcessCardNamesProcessCardType" StoreEntitySet="ProcessCardNames">
+    <AssociationSetMapping Name="ProcessCardNamesProcessCardType" TypeName="ProcessCardDataFramework.ProcessCardNamesProcessCardType" StoreEntitySet="Documents">
       <EndProperty Name="ProcessCardType">
-        <ScalarProperty Name="Id" ColumnName="ProcessCardType_Id" />
+        <ScalarProperty Name="Id" ColumnName="Template_Id" />
       </EndProperty>
       <EndProperty Name="ProcessCardNames">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProcessCardDataProcessCardDataTemplate" TypeName="ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate" StoreEntitySet="Data">
+      <EndProperty Name="ProcessCardDataTemplate">
+        <ScalarProperty Name="Id" ColumnName="Template_Id" />
+      </EndProperty>
+      <EndProperty Name="ProcessCardData">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DataRevision" TypeName="ProcessCardDataFramework.DataRevision" StoreEntitySet="Data">
+      <EndProperty Name="Revision">
+        <ScalarProperty Name="Id" ColumnName="Revision_Id" />
+      </EndProperty>
+      <EndProperty Name="Data">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DocumentData" TypeName="ProcessCardDataFramework.DocumentData" StoreEntitySet="Data">
+      <EndProperty Name="Document">
+        <ScalarProperty Name="Id" ColumnName="Document_Id" />
+      </EndProperty>
+      <EndProperty Name="Data">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -309,24 +334,17 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="ProcessCardDataFramework" >
-        <EntityTypeShape EntityType="ProcessCardDataFramework.ProcessCardNames" Width="1.5" PointX="0.5" PointY="0.625" Height="1.4033821614583326" />
-        <EntityTypeShape EntityType="ProcessCardDataFramework.ProcessCardData" Width="1.5" PointX="3.25" PointY="2" Height="2.1725878906249996" />
-        <AssociationConnector Association="ProcessCardDataFramework.ProcessCardNamesProcessCardData">
-          <ConnectorPoint PointX="2" PointY="2.2064925130208333" />
-          <ConnectorPoint PointX="3.25" PointY="2.2064925130208333" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="ProcessCardDataFramework.RevisionInformation" Width="1.5" PointX="5.5" PointY="3" Height="1.5956835937499996" />
-        <AssociationConnector Association="ProcessCardDataFramework.RevisionInformationProcessCardData">
-          <ConnectorPoint PointX="5.5" PointY="3.7785953776041663" />
-          <ConnectorPoint PointX="4.75" PointY="3.7785953776041663" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="ProcessCardDataFramework.ProcessCardType" Width="1.5" PointX="5.875" PointY="0.5" Height="1.4033821614583333" />
-        <EntityTypeShape EntityType="ProcessCardDataFramework.ProcessCardDataTemplate" Width="1.5" PointX="8.25" PointY="1.625" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="ProcessCardDataFramework.Document" Width="1.5" PointX="0.5" PointY="0.625" Height="1.4033821614583326" />
+        <EntityTypeShape EntityType="ProcessCardDataFramework.Data" Width="1.5" PointX="3.25" PointY="2" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="ProcessCardDataFramework.Revision" Width="1.5" PointX="5.5" PointY="3" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="ProcessCardDataFramework.Template" Width="1.5" PointX="5.875" PointY="0.5" Height="1.4033821614583333" />
+        <EntityTypeShape EntityType="ProcessCardDataFramework.DataTemplate" Width="1.5" PointX="8.25" PointY="1.625" Height="1.787985026041667" />
         <AssociationConnector Association="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType">
           <ConnectorPoint PointX="8.25" PointY="1.860341796875" />
           <ConnectorPoint PointX="7.375" PointY="1.860341796875" />
@@ -335,6 +353,9 @@
           <ConnectorPoint PointX="2" PointY="1.28125" />
           <ConnectorPoint PointX="5.875" PointY="1.28125" />
         </AssociationConnector>
+        <AssociationConnector Association="ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate" />
+        <AssociationConnector Association="ProcessCardDataFramework.DataRevision" />
+        <AssociationConnector Association="ProcessCardDataFramework.DocumentData" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
