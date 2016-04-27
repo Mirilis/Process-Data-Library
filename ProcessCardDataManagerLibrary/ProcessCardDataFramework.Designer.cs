@@ -34,32 +34,32 @@ namespace ProcessCardDataManagerLibrary
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ProcessCardDataFrameworkContainer : ObjectContext
+    public partial class ProcessDocumentDataContainer : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new ProcessCardDataFrameworkContainer object using the connection string found in the 'ProcessCardDataFrameworkContainer' section of the application configuration file.
+        /// Initializes a new ProcessDocumentDataContainer object using the connection string found in the 'ProcessDocumentDataContainer' section of the application configuration file.
         /// </summary>
-        public ProcessCardDataFrameworkContainer() : base("name=ProcessCardDataFrameworkContainer", "ProcessCardDataFrameworkContainer")
+        public ProcessDocumentDataContainer() : base("name=ProcessDocumentDataContainer", "ProcessDocumentDataContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ProcessCardDataFrameworkContainer object.
+        /// Initialize a new ProcessDocumentDataContainer object.
         /// </summary>
-        public ProcessCardDataFrameworkContainer(string connectionString) : base(connectionString, "ProcessCardDataFrameworkContainer")
+        public ProcessDocumentDataContainer(string connectionString) : base(connectionString, "ProcessDocumentDataContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ProcessCardDataFrameworkContainer object.
+        /// Initialize a new ProcessDocumentDataContainer object.
         /// </summary>
-        public ProcessCardDataFrameworkContainer(EntityConnection connection) : base(connection, "ProcessCardDataFrameworkContainer")
+        public ProcessDocumentDataContainer(EntityConnection connection) : base(connection, "ProcessDocumentDataContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -222,7 +222,7 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="value">Initial value of the Value property.</param>
-        public static Data CreateData(global::System.Int32 id, global::System.Byte value)
+        public static Data CreateData(global::System.Int32 id, global::System.String value)
         {
             Data data = new Data();
             data.Id = id;
@@ -266,7 +266,7 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte Value
+        public global::System.String Value
         {
             get
             {
@@ -276,13 +276,13 @@ namespace ProcessCardDataManagerLibrary
             {
                 OnValueChanging(value);
                 ReportPropertyChanging("Value");
-                _Value = StructuralObject.SetValidValue(value);
+                _Value = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Value");
                 OnValueChanged();
             }
         }
-        private global::System.Byte _Value;
-        partial void OnValueChanging(global::System.Byte value);
+        private global::System.String _Value;
+        partial void OnValueChanging(global::System.String value);
         partial void OnValueChanged();
 
         #endregion

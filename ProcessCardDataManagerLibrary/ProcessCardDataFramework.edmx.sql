@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/26/2016 18:20:07
+-- Date Created: 04/26/2016 20:51:41
 -- Generated from EDMX file: C:\Users\Mirilis\Documents\Visual Studio 2015\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
 -- --------------------------------------------------
 
@@ -68,7 +68,7 @@ GO
 -- Creating table 'Data'
 CREATE TABLE [dbo].[Data] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Value] tinyint  NOT NULL,
+    [Value] nvarchar(max)  NOT NULL,
     [Template_Id] int  NOT NULL,
     [Revision_Id] int  NOT NULL,
     [Document_Id] int  NOT NULL

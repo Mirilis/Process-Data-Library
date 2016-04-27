@@ -45,7 +45,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Value" Type="tinyint" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Template_Id" Type="int" Nullable="false" />
     <Property Name="Revision_Id" Type="int" Nullable="false" />
     <Property Name="Document_Id" Type="int" Nullable="false" />
@@ -138,7 +138,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ProcessCardDataFramework" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="ProcessCardDataFrameworkContainer" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProcessDocumentDataContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Documents" EntityType="ProcessCardDataFramework.Document" />
           <EntitySet Name="Data" EntityType="ProcessCardDataFramework.Data" />
           <EntitySet Name="Revisions" EntityType="ProcessCardDataFramework.Revision" />
@@ -179,7 +179,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Byte" Name="Value" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" />
           <NavigationProperty Name="Template" Relationship="ProcessCardDataFramework.ProcessCardDataProcessCardDataTemplate" FromRole="ProcessCardData" ToRole="ProcessCardDataTemplate" />
           <NavigationProperty Name="Revision" Relationship="ProcessCardDataFramework.DataRevision" FromRole="Data" ToRole="Revision" />
           <NavigationProperty Name="Document" Relationship="ProcessCardDataFramework.DocumentData" FromRole="Data" ToRole="Document" />
@@ -237,7 +237,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ProcessCardDataFrameworkStoreContainer" CdmEntityContainer="ProcessCardDataFrameworkContainer">
+  <EntityContainerMapping StorageEntityContainer="ProcessCardDataFrameworkStoreContainer" CdmEntityContainer="ProcessDocumentDataContainer">
     <EntitySetMapping Name="Documents">
       <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Document)">
         <MappingFragment StoreEntitySet="Documents">
