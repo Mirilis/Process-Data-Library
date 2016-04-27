@@ -1,9 +1,9 @@
 
 -- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
+-- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/26/2016 20:51:41
--- Generated from EDMX file: C:\Users\Mirilis\Documents\Visual Studio 2015\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
+-- Date Created: 04/27/2016 08:06:41
+-- Generated from EDMX file: C:\Users\ahoover\documents\visual studio 2010\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -60,7 +60,7 @@ GO
 -- Creating table 'Documents'
 CREATE TABLE [dbo].[Documents] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
+    [Title] nvarchar(max)  NOT NULL,
     [Template_Id] int  NOT NULL
 );
 GO
@@ -86,7 +86,7 @@ GO
 -- Creating table 'Templates'
 CREATE TABLE [dbo].[Templates] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Type] nvarchar(max)  NOT NULL
+    [TemplateType] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -144,7 +144,6 @@ ADD CONSTRAINT [FK_ProcessCardDataTemplateProcessCardType]
     REFERENCES [dbo].[Templates]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardDataTemplateProcessCardType'
 CREATE INDEX [IX_FK_ProcessCardDataTemplateProcessCardType]
@@ -159,7 +158,6 @@ ADD CONSTRAINT [FK_ProcessCardNamesProcessCardType]
     REFERENCES [dbo].[Templates]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardNamesProcessCardType'
 CREATE INDEX [IX_FK_ProcessCardNamesProcessCardType]
@@ -174,7 +172,6 @@ ADD CONSTRAINT [FK_ProcessCardDataProcessCardDataTemplate]
     REFERENCES [dbo].[DataTemplates]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProcessCardDataProcessCardDataTemplate'
 CREATE INDEX [IX_FK_ProcessCardDataProcessCardDataTemplate]
@@ -189,7 +186,6 @@ ADD CONSTRAINT [FK_DataRevision]
     REFERENCES [dbo].[Revisions]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DataRevision'
 CREATE INDEX [IX_FK_DataRevision]
@@ -204,7 +200,6 @@ ADD CONSTRAINT [FK_DocumentData]
     REFERENCES [dbo].[Documents]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DocumentData'
 CREATE INDEX [IX_FK_DocumentData]

@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataManager.cs" />
+    <Compile Include="ProcessDocumentPresenter.cs" />
     <Compile Include="DataTemplateDictionary.cs" />
     <Compile Include="DataValues.cs" />
+    <Compile Include="DocumentDataManager.cs" />
+    <Compile Include="DocumentManager.cs" />
     <Compile Include="Exceptions\ObjectExistsInDatabaseException.cs" />
     <Compile Include="Exceptions\TemplateDoesNotExistException.cs" />
     <Compile Include="ObjectXmlSerializer.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="DataType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\TypeMismatchException.cs" />
+    <Compile Include="TemplateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

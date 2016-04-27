@@ -37,7 +37,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Template_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Data">
@@ -63,7 +63,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TemplateType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="DataTemplates">
     <Key>
@@ -170,7 +170,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" />
           <NavigationProperty Name="Template" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardType" FromRole="ProcessCardNames" ToRole="ProcessCardType" />
           <NavigationProperty Name="Data" Relationship="ProcessCardDataFramework.DocumentData" FromRole="Document" ToRole="Data" />
         </EntityType>
@@ -198,7 +198,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Type" Nullable="false" />
+          <Property Type="String" Name="TemplateType" Nullable="false" />
           <NavigationProperty Name="DataTemplate" Relationship="ProcessCardDataFramework.ProcessCardDataTemplateProcessCardType" FromRole="ProcessCardType" ToRole="ProcessCardDataTemplate" />
           <NavigationProperty Name="Names" Relationship="ProcessCardDataFramework.ProcessCardNamesProcessCardType" FromRole="ProcessCardType" ToRole="ProcessCardNames" />
         </EntityType>
@@ -242,7 +242,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Document)">
         <MappingFragment StoreEntitySet="Documents">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -267,7 +267,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(ProcessCardDataFramework.Template)">
         <MappingFragment StoreEntitySet="Templates">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="TemplateType" ColumnName="TemplateType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

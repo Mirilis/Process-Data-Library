@@ -595,12 +595,12 @@ namespace ProcessCardDataManagerLibrary
         /// Create a new Document object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        public static Document CreateDocument(global::System.Int32 id, global::System.String name)
+        /// <param name="title">Initial value of the Title property.</param>
+        public static Document CreateDocument(global::System.Int32 id, global::System.String title)
         {
             Document document = new Document();
             document.Id = id;
-            document.Name = name;
+            document.Title = title;
             return document;
         }
 
@@ -640,24 +640,24 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Name
+        public global::System.String Title
         {
             get
             {
-                return _Name;
+                return _Title;
             }
             set
             {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
             }
         }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
 
         #endregion
 
@@ -893,12 +893,12 @@ namespace ProcessCardDataManagerLibrary
         /// Create a new Template object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        public static Template CreateTemplate(global::System.Int32 id, global::System.String type)
+        /// <param name="templateType">Initial value of the TemplateType property.</param>
+        public static Template CreateTemplate(global::System.Int32 id, global::System.String templateType)
         {
             Template template = new Template();
             template.Id = id;
-            template.Type = type;
+            template.TemplateType = templateType;
             return template;
         }
 
@@ -938,24 +938,24 @@ namespace ProcessCardDataManagerLibrary
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Type
+        public global::System.String TemplateType
         {
             get
             {
-                return _Type;
+                return _TemplateType;
             }
             set
             {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
+                OnTemplateTypeChanging(value);
+                ReportPropertyChanging("TemplateType");
+                _TemplateType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("TemplateType");
+                OnTemplateTypeChanged();
             }
         }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
+        private global::System.String _TemplateType;
+        partial void OnTemplateTypeChanging(global::System.String value);
+        partial void OnTemplateTypeChanged();
 
         #endregion
 
