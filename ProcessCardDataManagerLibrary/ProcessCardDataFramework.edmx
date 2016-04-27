@@ -46,7 +46,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Template_Id" Type="int" Nullable="false" />
+    <Property Name="Template_Id" Type="int" Nullable="true" />
     <Property Name="Revision_Id" Type="int" Nullable="false" />
     <Property Name="Document_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -100,7 +100,7 @@
   </Association>
   <Association Name="ProcessCardDataProcessCardDataTemplate">
     <End Role="ProcessCardData" Type="ProcessCardDataFramework.Store.Data" Multiplicity="*" />
-    <End Role="ProcessCardDataTemplate" Type="ProcessCardDataFramework.Store.DataTemplates" Multiplicity="1" />
+    <End Role="ProcessCardDataTemplate" Type="ProcessCardDataFramework.Store.DataTemplates" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="ProcessCardDataTemplate">
         <PropertyRef Name="Id" />
@@ -222,7 +222,7 @@
         </Association>
         <Association Name="ProcessCardDataProcessCardDataTemplate">
           <End Type="ProcessCardDataFramework.Data" Role="ProcessCardData" Multiplicity="*" />
-          <End Type="ProcessCardDataFramework.DataTemplate" Role="ProcessCardDataTemplate" Multiplicity="1" />
+          <End Type="ProcessCardDataFramework.DataTemplate" Role="ProcessCardDataTemplate" Multiplicity="0..1" />
         </Association>
         <Association Name="DataRevision">
           <End Type="ProcessCardDataFramework.Data" Role="Data" Multiplicity="1" />
@@ -303,6 +303,7 @@
       <EndProperty Name="ProcessCardData">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Template_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="DataRevision" TypeName="ProcessCardDataFramework.DataRevision" StoreEntitySet="Data">
       <EndProperty Name="Revision">

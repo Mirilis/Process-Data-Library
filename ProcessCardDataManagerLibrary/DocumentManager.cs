@@ -19,7 +19,7 @@ namespace ProcessCardDataManagerLibrary
         {
             get
             {
-                return DocumentTitles.Count();
+                return documentTitles.Count();
             }
         }
 
@@ -35,9 +35,9 @@ namespace ProcessCardDataManagerLibrary
                     var actualDocumentCount = SQLDB.Documents.Count();
                     if (currentDocumentCount != actualDocumentCount)
                     {
-                        return false;
+                        return true;
                     }
-                    return true;
+                    return false;
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace ProcessCardDataManagerLibrary
                 var p = SQLDB.Documents;
                 if (!p.Any())
                 {
-                    return null;
+                    CreateBlankDocument("Blank", "Blank");
                 }
 
                 return p.Select(x => x.Title).ToList();
@@ -78,7 +78,7 @@ namespace ProcessCardDataManagerLibrary
 
         public bool DocumentExists(string Name)
         {
-            if (DocumentTitles.Select(x => x == Name).Any())
+            if (DocumentTitles.Where(x => x == Name).Any())
             {
                 return true;
             }
@@ -99,7 +99,7 @@ namespace ProcessCardDataManagerLibrary
                 foreach (var variable in Variables)
                 {
                     var tmpVariable = tmpDocument.Data.Where(x => x.Template.Name == variable.Variable).First();
-                    tmpVariable.Value = ObjectXmlSerializer.ObjectToXMLGeneric<object>(variable.Value);
+                    tmpVariable.Value = XMLSerializer.ObjectToXML<object>(variable.Value);
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace ProcessCardDataManagerLibrary
         }
 
         private TemplateManager DocumentTemplates;
-        private DocumentDataManager documentDataManager;
+        private DataManager documentDataManager;
 
 
 
@@ -149,7 +149,7 @@ namespace ProcessCardDataManagerLibrary
 
 
 
-        public void NewDocument(string DocumentTitle, string TemplateName)
+        public void CreateNewDocument(string DocumentTitle, string TemplateName)
         {
             if (DocumentExists(DocumentTitle))
             {
@@ -160,6 +160,11 @@ namespace ProcessCardDataManagerLibrary
                 throw new Exceptions.ObjectDoesNotExistException(TemplateName);
             }
 
+            CreateBlankDocument(DocumentTitle,TemplateName);
+        }
+
+        public void CreateBlankDocument(string DocumentTitle, string TemplateName)
+        {
             using (var SQLDB = new ProcessDocumentDataContainer())
             {
                 var tmpTemplate = SQLDB.Templates.Where(x => x.TemplateType == TemplateName).FirstOrDefault();
@@ -174,12 +179,18 @@ namespace ProcessCardDataManagerLibrary
                     tmpRevision.Author = "None";
                     tmpRevision.Date = DateTime.Now;
                     tmpData.Revision = tmpRevision;
+                    var t = new DataType(DataTemplate.Type);
+
+                    tmpData.Value = SerializeDataValue(t.Blank);
                     doc.Data.Add(tmpData);
                 }
                 SQLDB.SaveChanges();
             }
         }
-
+        private string SerializeDataValue(object ObjectToSerialize)
+        {
+            return XMLSerializer.ObjectToXML<object>(ObjectToSerialize);
+        }
         
     }
 }

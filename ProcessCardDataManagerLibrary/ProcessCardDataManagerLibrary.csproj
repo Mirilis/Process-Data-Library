@@ -56,7 +56,7 @@
     <Compile Include="ProcessDocumentPresenter.cs" />
     <Compile Include="DataTemplateDictionary.cs" />
     <Compile Include="DataValues.cs" />
-    <Compile Include="DocumentDataManager.cs" />
+    <Compile Include="DataManager.cs" />
     <Compile Include="DocumentManager.cs" />
     <Compile Include="Exceptions\ObjectExistsInDatabaseException.cs" />
     <Compile Include="Exceptions\TemplateDoesNotExistException.cs" />

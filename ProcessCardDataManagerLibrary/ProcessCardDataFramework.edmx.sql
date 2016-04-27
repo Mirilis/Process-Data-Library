@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/27/2016 08:06:41
--- Generated from EDMX file: C:\Users\ahoover\documents\visual studio 2010\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
+-- Date Created: 04/27/2016 11:04:19
+-- Generated from EDMX file: C:\Users\ahoover\Documents\Visual Studio 2010\Projects\ProcessCardDataManagerLibrary\ProcessCardDataManagerLibrary\ProcessCardDataFramework.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -69,7 +69,7 @@ GO
 CREATE TABLE [dbo].[Data] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Value] nvarchar(max)  NOT NULL,
-    [Template_Id] int  NOT NULL,
+    [Template_Id] int  NULL,
     [Revision_Id] int  NOT NULL,
     [Document_Id] int  NOT NULL
 );

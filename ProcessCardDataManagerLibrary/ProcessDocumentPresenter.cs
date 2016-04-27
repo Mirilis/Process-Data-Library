@@ -11,11 +11,11 @@ namespace ProcessCardDataManagerLibrary
         /// <summary>
         /// A List of Process Card Templates in Database.
         /// </summary>
-        public List<string> Templates
+        public List<string> TemplateTypes
         {
             get
             {
-                return TemplateManager.TemplateTypes;
+                return Templates.TemplateTypes;
             }
         }
 
@@ -26,33 +26,33 @@ namespace ProcessCardDataManagerLibrary
         {
             get
             {
-                return DocumentManager.DocumentTitles;
+                return Documents.DocumentTitles;
             }
         }
         
-        private DocumentManager documentManager;
-        private DocumentManager DocumentManager
+        private DocumentManager documents;
+        public DocumentManager Documents
         {
             get
             {
-                if (documentManager == null)
+                if (documents == null)
                 {
-                    documentManager = new DocumentManager(TemplateManager);
+                    documents = new DocumentManager(Templates);
                 }
-                return documentManager;
+                return documents;
             }
         }
 
-        private TemplateManager templateManager;
-        private TemplateManager TemplateManager
+        private TemplateManager templates;
+        public TemplateManager Templates
         {
             get
             {
-                if (templateManager == null)
+                if (templates == null)
                 {
-                    templateManager = new TemplateManager();
+                    templates = new TemplateManager();
                 }
-                return templateManager;
+                return templates;
             }
         }
 

@@ -7,9 +7,9 @@ using System.IO;
 
 namespace ProcessCardDataManagerLibrary
 {
-    public static class ObjectXmlSerializer
+    public static class XMLSerializer
     {
-        public static String ObjectToXMLGeneric<T>(T filter)
+        public static String ObjectToXML<T>(T filter)
         {
 
             string xml = null;

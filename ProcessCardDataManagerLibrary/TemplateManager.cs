@@ -16,7 +16,7 @@ namespace ProcessCardDataManagerLibrary
         {
             get
             {
-                return TemplateTypes.Count();
+                return templateTypes.Count();
             }
         }
 
@@ -29,9 +29,9 @@ namespace ProcessCardDataManagerLibrary
                     var actualTemplateTypeCount = SQLDB.Templates.Count();
                     if (currentTemplateTypeCount != actualTemplateTypeCount)
                     {
-                        return false;
+                        return true;
                     }
-                    return true;
+                    return false;
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace ProcessCardDataManagerLibrary
         {
             get
             {
-                if (templateTypes == null || TemplateListHasChanged)
+                if (TemplateListHasChanged)
                 {
                     templateTypes = GetTemplatesFromDatabase();
                 }
@@ -54,7 +54,7 @@ namespace ProcessCardDataManagerLibrary
 
         public bool TemplateExists(string Template)
         {
-            if (TemplateTypes.Select(x => x == Template).Any())
+            if (TemplateTypes.Where(x => x == Template).Any())
             {
                 return true;
             }
@@ -74,15 +74,63 @@ namespace ProcessCardDataManagerLibrary
                 var templateName = new Template();
                 templateName.TemplateType = Type;
                 SQLDB.AddToTemplates(templateName);
+                SQLDB.SaveChanges();
+                Console.WriteLine(SQLDB.Templates.Count().ToString());
+                AddDataTemplateValues(templateName.TemplateType, DataTemplateValues);
+            }
+        }
+
+        public void AddDataTemplateValues(string templateName, DataTemplateDictionary DataTemplateValues)
+        {
+            var template = GetTemplate(templateName);
+            using (var context = new ProcessDocumentDataContainer())
+            {
+                context.Templates.Attach(template);
                 foreach (var dataValue in DataTemplateValues)
                 {
+
                     var templateData = new DataTemplate();
-                    templateData.Template = templateName;
+                    templateData.Template = template;
                     templateData.Name = dataValue.Key;
-                    templateData.Type = dataValue.Value.ToString();
-                    SQLDB.AddToDataTemplates(templateData);
+                    templateData.Type = dataValue.Value.CurrentType.ToString();
+                    context.DataTemplates.AddObject(templateData);
                 }
+            context.SaveChanges();
+            }
+        }
+
+        public void CreateNewTemplate(string Type)
+        {
+            using (var SQLDB = new ProcessDocumentDataContainer())
+            {
+                var templateName = new Template();
+                templateName.TemplateType = Type;
+                SQLDB.AddToTemplates(templateName);
                 SQLDB.SaveChanges();
+            }
+        }
+
+
+        public TemplateManager()
+        {
+            templateTypes = GetTemplatesFromDatabase();
+        }
+
+        public Template GetTemplate(string TemplateType)
+        {
+            using (var SQLDB = new ProcessDocumentDataContainer())
+            {
+                var templateRequested = SQLDB.Templates.Where(x => x.TemplateType == TemplateType);
+                if (templateRequested.Any())
+                {
+                    var template = templateRequested.First();
+                    SQLDB.Detach(template);
+                    return template;
+                }
+                else
+                {
+                    throw new Exceptions.ObjectDoesNotExistException(TemplateType);
+                }
             }
         }
 
@@ -97,7 +145,14 @@ namespace ProcessCardDataManagerLibrary
                 var p = SQLDB.Templates;
                 if (!p.Any())
                 {
-                    return null;
+                    var dtd = new DataTemplateDictionary() 
+                    { 
+                        {"Name",new DataType("String")},
+                        {"Number",new DataType("Int")},
+                        {"Double",new DataType("Double")}
+                    };
+                    CreateNewTemplate("Blank", dtd);
+                    
                 }
 
                 return p.Select(x => x.TemplateType).ToList();
