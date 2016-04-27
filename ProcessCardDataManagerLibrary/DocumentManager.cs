@@ -11,7 +11,17 @@ namespace ProcessCardDataManagerLibrary
         /// Private storage for Document List
         /// </summary>
         private List<string> documentTitles;
-        
+
+        /// <summary>
+        /// Template Manager Dependency.
+        /// </summary>
+        private TemplateManager DocumentTemplates;
+
+        /// <summary>
+        /// DataManager Dependency.
+        /// </summary>
+        private DataManager documentDataManager;
+
         /// <summary>
         /// Current Count of Document Titles in Database.
         /// </summary>
@@ -76,6 +86,11 @@ namespace ProcessCardDataManagerLibrary
             }
         }
 
+        /// <summary>
+        /// Does the document exist?
+        /// </summary>
+        /// <param name="Name">Name of the document</param>
+        /// <returns>Returns true if the document exists in the document manager.</returns>
         public bool DocumentExists(string Name)
         {
             if (DocumentTitles.Where(x => x == Name).Any())
@@ -85,6 +100,11 @@ namespace ProcessCardDataManagerLibrary
             return false;
         }
 
+        /// <summary>
+        /// Add variables to the document store.
+        /// </summary>
+        /// <param name="DocumentTitle"></param>
+        /// <param name="Variables"></param>
         public void AddDocumentVariables(string DocumentTitle, List<DataValues> Variables)
         {
             using (var SQLDB = new ProcessDocumentDataContainer())
@@ -104,6 +124,11 @@ namespace ProcessCardDataManagerLibrary
             }
         }
 
+        /// <summary>
+        /// Get a detached Database Object Document from Database.
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <returns></returns>
         public Document GetDocument(string Title)
         {
             using (var SQLDB = new ProcessDocumentDataContainer())
@@ -122,33 +147,48 @@ namespace ProcessCardDataManagerLibrary
             }
         }
 
-        private TemplateManager DocumentTemplates;
-        private DataManager documentDataManager;
-
-
-
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="DocumentTemplates"></param>
         public DocumentManager(TemplateManager DocumentTemplates)
         {
             this.DocumentTemplates = DocumentTemplates;
         }
 
-        public void CopyDocument(string DocumentTitle)
+        /// <summary>
+        /// Copies a document.
+        /// </summary>
+        /// <param name="DocumentTitleToCopy"></param>
+        /// <param name="NewDocumentTitle"></param>
+        public void CopyDocument(string DocumentTitleToCopy, String NewDocumentTitle)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Deletes a document from Database.
+        /// </summary>
+        /// <param name="DocumentTitle"></param>
         public void DeleteDocument(string DocumentTitle)
         {
             throw new NotImplementedException();
         }
-
+        
+        /// <summary>
+        /// Updates Document fields. 
+        /// </summary>
+        /// <param name="DocumentTitle"></param>
         public void UpdateDocument(string DocumentTitle)
         {
             throw new NotImplementedException();
         }
 
-
-
+        /// <summary>
+        /// Creates a new document based on the provided template.
+        /// </summary>
+        /// <param name="DocumentTitle"></param>
+        /// <param name="TemplateName"></param>
         public void CreateNewDocument(string DocumentTitle, string TemplateName)
         {
             if (DocumentExists(DocumentTitle))
@@ -163,6 +203,11 @@ namespace ProcessCardDataManagerLibrary
             CreateBlankDocument(DocumentTitle,TemplateName);
         }
 
+        /// <summary>
+        /// Creates the base of a new document.
+        /// </summary>
+        /// <param name="DocumentTitle"></param>
+        /// <param name="TemplateName"></param>
         public void CreateBlankDocument(string DocumentTitle, string TemplateName)
         {
             using (var SQLDB = new ProcessDocumentDataContainer())
@@ -187,10 +232,15 @@ namespace ProcessCardDataManagerLibrary
                 SQLDB.SaveChanges();
             }
         }
+        
+        /// <summary>
+        /// Serializes data values for storage via xml serializer.
+        /// </summary>
+        /// <param name="ObjectToSerialize"></param>
+        /// <returns></returns>
         private string SerializeDataValue(object ObjectToSerialize)
         {
             return XMLSerializer.ObjectToXML<object>(ObjectToSerialize);
         }
-        
     }
 }
